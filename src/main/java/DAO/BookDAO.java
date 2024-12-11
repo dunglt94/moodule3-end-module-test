@@ -16,7 +16,7 @@ public class BookDAO implements IBookDAO {
 
     private static final String SELECT_ALL_BOOKS = "SELECT * FROM book";
     private static final String INSERT_BOOK = "INSERT INTO book (name, author, description, quantity) VALUES (?,?,?,?)";
-    private static final String SELECT_BOOK_BY_CODE = "SELECT * FROM book WHERE code = ?";
+    private static final String SELECT_BOOK_BY_ID = "SELECT * FROM book WHERE id = ?";
     private static final String UPDATE_BOOK = "call update_book(?,?,?,?,?)";
     private static final String DELETE_BOOK = "DELETE FROM book WHERE id = ?";
 
@@ -75,11 +75,11 @@ public class BookDAO implements IBookDAO {
     }
 
     @Override
-    public Book findByCode(String code) {
+    public Book findById(int id) {
         Book book = null;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_CODE)) {
-            preparedStatement.setString(1, code);
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_ID)) {
+            preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 System.out.println(preparedStatement);
                 while (resultSet.next()) {

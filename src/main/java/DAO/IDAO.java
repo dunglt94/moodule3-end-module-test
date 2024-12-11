@@ -11,7 +11,7 @@ public interface IDAO<T> {
 
     void add(T object);
 
-    T findByCode(String code);
+    T findById(int id);
 
     void update(T object);
 

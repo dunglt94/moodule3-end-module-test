@@ -1,6 +1,5 @@
 package DAO;
 
-import model.Book;
 import model.Student;
 
 import java.sql.*;
@@ -59,7 +58,7 @@ public class StudentDAO implements IStudentDAO {
     }
 
     @Override
-    public Student findByCode(String code) {
+    public Student findById(int id) {
         return null;
     }
 

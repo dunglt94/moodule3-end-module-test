@@ -52,8 +52,8 @@
                     <td>${book.description}</td>
                     <td>
                         <form method="get" style="margin: 0">
-                            <input type="hidden" name="id" value="${book.code}">
                             <button class="btn btn-primary" name="action" value="loan">Mượn</button>
+                            <input type="hidden" name="id" value="${book.id}">
                         </form>
                     </td>
                 </tr>
@@ -61,8 +61,6 @@
         </tbody>
     </table>
     </div>
-
-
 </div>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">

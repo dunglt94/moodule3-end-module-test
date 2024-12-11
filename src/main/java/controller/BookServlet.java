@@ -1,9 +1,11 @@
 package controller;
 
 import model.Book;
+import model.Student;
 import service.BookService;
 import service.IBookService;
 import service.IStudentService;
+import service.StudentService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +19,7 @@ import java.util.List;
 @WebServlet(name = "BookServlet", urlPatterns = "/books")
 public class BookServlet extends HttpServlet {
     IBookService bookService = new BookService();
-    IStudentService studentService = new
+    IStudentService studentService = new StudentService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +28,7 @@ public class BookServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "add":
+            case "loan":
 
                 break;
             default:
@@ -43,7 +45,7 @@ public class BookServlet extends HttpServlet {
         }
         switch (action) {
             case "loan":
-                showLoanFrom(req, resp );
+                showLoanFrom(req, resp);
             break;
             default:
                 showBookList(req, resp);
@@ -63,6 +65,20 @@ public class BookServlet extends HttpServlet {
         }
     }
     private void showLoanFrom(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int bookId = Integer.parseInt(req.getParameter("id"));
+        Book books = bookService.findById(bookId);
+        List<Student> students = studentService.findAll();
 
+        req.setAttribute("book", books);
+        req.setAttribute("students", students);
+        req.setAttribute("bookCode", bookId);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("book/loan.jsp");
+        try{
+            dispatcher.forward(req, resp);
+        } catch (ServletException | IOException e) {
+            //noinspection CallToPrintStackTrace
+            e.printStackTrace();
+        }
     }
 }

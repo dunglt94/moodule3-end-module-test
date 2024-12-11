@@ -20,7 +20,7 @@ public class BookService implements IBookService {
 
     @Override
     public Book findById(int id) {
-        return null;
+        return bookDAO.findById(id);
     }
 
     @Override
